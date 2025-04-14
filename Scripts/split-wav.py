@@ -15,7 +15,8 @@ def split_wav_file(input_path, output_base_dir, clip_length_seconds=5):
     """
     # Get the filename without extension
     filename = os.path.basename(input_path)
-    name_without_ext = os.path.splitext(filename)[0]
+    name_without_ext = os.path.splitext(filename)[0].split("_")[0]
+
     
     # Create a subfolder named after the food (original filename)
     food_subfolder = os.path.join(output_base_dir, name_without_ext)
@@ -38,7 +39,7 @@ def split_wav_file(input_path, output_base_dir, clip_length_seconds=5):
         clip = audio[start_ms:end_ms]
         
         # Define the output filename
-        output_filename = f"{name_without_ext}_{clip_number}.wav"
+        output_filename = f"{os.path.splitext(filename)[0]}_{clip_number}.wav"
         output_path = os.path.join(food_subfolder, output_filename)
         
         # Export the clip
